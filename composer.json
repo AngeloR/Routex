@@ -3,6 +3,8 @@
 	"version": "0.1.0",
 	"license": "MIT",
 
+	"description": "Slim PHP Framework for routing",
+
 	"authors": [
 		{
 			"name": "Angelo Rodrigues",
@@ -17,8 +19,6 @@
 	},
 
 	"autoload": {
-		"psr-0": {
-			"\Routex": ""
-		}
+		"psr-0": {"": ""}
 	}
 }
