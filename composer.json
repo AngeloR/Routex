@@ -1,4 +1,24 @@
 {
 	"name": "angelor/routex",
-	"version": "0.1.0"
+	"version": "0.1.0",
+	"license": "MIT",
+
+	"authors": [
+		{
+			"name": "Angelo Rodrigues",
+			"email": "xangelo@gmail.com",
+			"homepage": "http://xangelo.ca",
+			"role": "Developer"
+		}
+	],
+
+	"support": {
+		"email": "xangelo@gmail.com"
+	},
+
+	"autoload": {
+		"psr-0": {
+			{"\Routex": ""}
+		}
+	}
 }
