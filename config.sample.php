@@ -2,4 +2,4 @@
 
 $config['app']['env'] = 'development';
 
-$config['path']['route'] = '/index.php';
+$config['route']['path'] = 'uri';
