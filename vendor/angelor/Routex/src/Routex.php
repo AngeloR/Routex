@@ -95,7 +95,7 @@ class Routex {
 		$res = new HTTPResponse();
 
 		if(is_callable($callback)) {
-			$res->statusCode = $res->STATUS['OK'];
+			$res->statusCode = $res->statusCodes->OK;
 			call_user_func($callback, $req, $res);
 		}
 		else {
