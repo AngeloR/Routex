@@ -50,6 +50,11 @@ class Route {
 			else if(preg_match($route, $uri)){
 				$callback = $path->callback;
 				$req->setParams(self::findArgs($uri, $path), $path);
+
+				// if a post var, then grab the post vars :D 
+				if($httpVerb == 'POST') {
+					$req->setParams($_POST);
+				}
 			}
 
 			if(isset($callback)) {

@@ -16,15 +16,16 @@ class HTTPRequest {
 	private $headers;
 
 	public function __construct($args = array()) {
+		$this->params = array();
+		$this->setHeaders();
+
 		if(is_array($args)) {
 			$this->setParams($args);
 		}
-
-		$this->setHeaders();
 	}
 
 	public function setParams($args) {
-		$this->params = $args;
+		$this->params = array_merge($this->params, $args);
 	}
 	
 	public function param($name) {
