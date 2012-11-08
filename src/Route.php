@@ -123,17 +123,17 @@ class Route {
 	    	$paramCount = 0;
 
 	    	foreach($pieces as $piece) {
+		    	$name = $paramCount;
+
 	      		if(empty($piece)) continue;
 
 	      		// extracting double asterisk **
 	      		if($piece == "**") {
 	        		$parsed[] = $double_asterisk_subpattern;
-	        		$name = $paramCount;
 	        	}
 	     		// extracting single asterisk *
 	      		elseif($piece == "*") {
 	        		$parsed[] = $single_asterisk_subpattern;
-	        		$name = $paramCount;
 	        	}
 	      		// extracting named parameters :my_param 
 	      		elseif($piece[0] == ":") {
