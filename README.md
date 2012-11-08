@@ -11,7 +11,8 @@ There are two ways to install: You can entire utilize Composer or download the G
 - [Download the repo](https://github.com/AngeloR/Routex/downloads)
 - Unzip it wherever you require
 - Set up your psr-0 standard autoloader OR Include the following files: 
-	<pre><code>include('vendor/angelor/Routex/common/Exceptions.php');
+	<pre><code>include('vendor/angelor/Routex/src/Common/MimeType.php');
+	include('vendor/angelor/Routex/src/Common/Exceptions.php');
 	include('vendor/angelor/Routex/src/Response/HttpResponseCode.php');
 	include('vendor/angelor/Routex/src/Response/HttpResponse.php');
 	include('vendor/angelor/Routex/src/Request/HttpRequest.php');

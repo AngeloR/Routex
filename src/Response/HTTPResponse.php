@@ -2,7 +2,7 @@
 
 namespace Routex;
 
-use \Common\ResponseHeaderException; 
+use \Routex\Common\ResponseHeaderException; 
 use \Routex\Response\HttpResponseCode;
 use \Routex\MimeType;
 

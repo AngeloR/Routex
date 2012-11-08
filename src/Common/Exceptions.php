@@ -1,5 +1,5 @@
 <?php 
-namespace Common; 
+namespace Routex\Common; 
 
 class RouteException extends \Exception {}
 

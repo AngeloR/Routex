@@ -2,7 +2,7 @@
 
 namespace Routex;
 
-use \Common\RouteException; 
+use \Routex\Common\RouteException; 
 use \Routex\Request\HttpRequest;
 use \Routex\Route\Path;
 /**
