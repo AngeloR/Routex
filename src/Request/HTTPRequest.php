@@ -43,7 +43,10 @@ class HTTPRequest {
 	}
 
 	public function header($name) {
-
+		if(is_array($this->headers)) {
+			return $this->headers[$name];
+		}
+		return null;
 	}
 
 	public function headers() {
