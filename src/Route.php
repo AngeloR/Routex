@@ -98,8 +98,7 @@ class Route {
 	private static function routeBuild($path) {
 		$routePath = new Path();
 
-		$single_asterisk_subpattern   = "(?:/([^\/]*))?";
-	  	$double_asterisk_subpattern   = "(?:/(.*))?";
+	  	$single_asterisk_subpattern   = "(?:/(.*))?";
 	  	$optionnal_slash_subpattern   = "(?:/*?)";
 	  	$no_slash_asterisk_subpattern = "(?:([^\/]*))?";
 
@@ -122,13 +121,8 @@ class Route {
 	    	foreach($pieces as $piece) {
 	      		if(empty($piece)) continue;
 
-	      		// extracting double asterisk **
-	      		if($piece == "**") {
-	        		$parsed[] = $double_asterisk_subpattern;
-	        		$name = $paramCount;
-	        	}
-	     		// extracting single asterisk *
-	      		elseif($piece == "*") {
+	      		// extracting single asterisk *
+	      		if($piece == "*") {
 	        		$parsed[] = $single_asterisk_subpattern;
 	        		$name = $paramCount;
 	        	}
