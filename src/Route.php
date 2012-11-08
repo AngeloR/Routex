@@ -10,12 +10,9 @@ use \Routex\Route\Path;
  */
 class Route {
 
-	public static $REQUEST_METHODS = array('GET','PUT','POST','DELETE');
+	public static $REQUEST_METHODS = array('GET','PUT','POST','DELETE', 'HEAD');
 
-	public static $VERB_GET = array();
-	public static $VERB_POST = array();
-	public static $VERB_PUT = array();
-	public static $VERB_DELETE = array();
+	public static $VERBS = array(); 
 
 	/**
 	 * To keep things generic, this method ends up being called by  get/post/put/delete 
@@ -23,12 +20,13 @@ class Route {
 	 * callback for the specific verb.
 	 */
 	public static function add($httpVerb, $route, $callback) {
+		$httpVerb = strtoupper($httpVerb);
 		if(in_array($httpVerb, self::$REQUEST_METHODS)) {
-			$verb = 'VERB_' . $httpVerb;
 			$route = self::routeBuild($route);
 			$route->callback = $callback;
-			self::${$verb}[$route->regex] = $route;
-			krsort(self::${$verb});
+			self::$VERBS[$httpVerb][$route->regex] = $route;
+
+			krsort(self::$VERBS[$httpVerb]);
 		}
 		else {
 			throw new RouteException($httpVerb.' is not a valid HTTP Verb.');
@@ -40,9 +38,8 @@ class Route {
 	 * It then grabs the user-defined args from the list and returns them.
 	 */
 	public static function find($httpVerb, $uri, &$req) {
-		$verb = 'VERB_' . $httpVerb;
 
-		foreach(self::${$verb} as $route => $path) {
+		foreach(self::$VERBS[$httpVerb] as $route => $path) {
 			if($route == $uri) {
 				// direct match, no need for slower regex
 				$callback = $path->callback;
@@ -123,17 +120,17 @@ class Route {
 	    	$paramCount = 0;
 
 	    	foreach($pieces as $piece) {
-		    	$name = $paramCount;
-
 	      		if(empty($piece)) continue;
 
 	      		// extracting double asterisk **
 	      		if($piece == "**") {
 	        		$parsed[] = $double_asterisk_subpattern;
+	        		$name = $paramCount;
 	        	}
 	     		// extracting single asterisk *
 	      		elseif($piece == "*") {
 	        		$parsed[] = $single_asterisk_subpattern;
+	        		$name = $paramCount;
 	        	}
 	      		// extracting named parameters :my_param 
 	      		elseif($piece[0] == ":") {

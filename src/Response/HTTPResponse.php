@@ -57,11 +57,25 @@ class HTTPResponse {
 	 * @var $overwrite bool Should Routex overwrite an existing header
 	 */
 	public function writeHeader($name, $content, $overwrite = false) {
-		if(!array_key_exists($name, $this->headers) || $overwrite) {
-			$this->headers[$name] = $content;
+		header($name . ': ' . $content, $overwrite);
+	}
+
+	/**
+	 * This should be used when you do not want to return anything 
+	 */
+	public function end($mime = null) {
+		// set the status codes for phpfpm
+		if(empty($this->statusCode)) {
+			$this->statusCode = $this->statusCodes->OK;
 		}
-		else {
-			throw new ResponseHeaderException('Header: ['.$name.': '.$content.'] already exists.');
+		$this->writeHeader('Status', $this->statusCode);
+		// this header is special due to its format! 
+		// set the status codes for mod_php
+		header('HTTP/1.1 ' . $this->statusCode);
+
+		
+		if(!empty($mime)) {
+			$this->writeHeader('Content-type', $mime);
 		}
 	}
 
@@ -111,19 +125,7 @@ class HTTPResponse {
 	 * methods, use writeHeader. 
 	 */
 	public function create($mime, $thing) {
-		// set the status codes for phpfpm
-		if(empty($this->statusCode)) {
-			$this->statusCode = $this->statusCodes->OK;
-		}
-		$this->writeHeader('Status', $this->statusCode);
-		$this->writeHeader('Content-type', $mime);
-
-		foreach($this->headers as $name => $header) {
-			header($name . ': ' . $header);
-		}
-		// this header is special due to its format! 
-		// set the status codes for mod_php
-		header('HTTP/1.1 ' . $this->statusCode);
+		$this->end($mime);
 
 		echo $thing;
 	}
