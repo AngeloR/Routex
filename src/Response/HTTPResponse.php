@@ -4,6 +4,7 @@ namespace Routex;
 
 use \Common\ResponseHeaderException; 
 use \Routex\Response\HttpResponseCode;
+use \Routex\MimeType;
 
 /**
  * The Response class is used to return your result back to the user. It applies the 
@@ -33,17 +34,6 @@ class HttpResponse {
 	 * @var \Routex\ResponseCode
 	 */
 	public $statusCodes;
-
-	/**
-	 * A list of mimetypes that are currently supported
-	 */
-	public $mimetype = array(
-			'text' => 'text/plain',
-			'html' => 'text/html',
-			'json' => 'application/json',
-			'css' => 'text/css',
-			'js' => 'application/javascript',
-		);
 
 	public function __construct() {
 		$this->statusCodes = new HttpResponseCode;
@@ -83,28 +73,28 @@ class HttpResponse {
 	 * Return a text type doc
 	 */
 	public function text($thing) {
-		$this->create($this->mimetype['text'], $thing);
+		$this->create(MimeType::$text, $thing);
 	}
 
 	/**
 	 * Return a css type doc
 	 */
 	public function css($thing) {
-		$this->create($this->mimetype['css'], $thing);
+		$this->create(MimeType::$css, $thing);
 	}
 
 	/**
 	 * Return a js type doc
 	 */
 	public function js($thing) {
-		$this->create($this->mimetype['js'], $thing);
+		$this->create(MimeType::$js, $thing);
 	}
 
 	/**
 	 * Return an html type doc
 	 */
 	public function html($thing) {
-		$this->create($this->mimetype['html'], $thing);
+		$this->create(MimeType::$html, $thing);
 	}
 
 	/**
@@ -114,7 +104,7 @@ class HttpResponse {
 		$thing = json_encode($thing);
 		// json requests will most likely change, so this is set by default
 		$this->writeHeader('Cache-Control', 'no-cache, must-revalidate');
-		$this->create($this->mimetype['json'], $thing);
+		$this->create(MimeType::$json, $thing);
 	}
 
 	/**
