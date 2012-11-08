@@ -3,14 +3,14 @@
 namespace Routex\Request;
 
 /**
- * The standard HTTPRequest object that is created regardless of whether a route is matched 
+ * The standard HttpRequest object that is created regardless of whether a route is matched 
  * or not. 
  * 
- * The HTTPRequest object is passed as the first argument to any action endpoint. It 
+ * The HttpRequest object is passed as the first argument to any action endpoint. It 
  * contains information about variables within the url, as well as information related 
  * to the client-side request such as headers.
  */
-class HTTPRequest {
+class HttpRequest {
 
 	private $params;
 	private $headers;

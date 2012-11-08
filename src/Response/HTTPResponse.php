@@ -3,7 +3,7 @@
 namespace Routex;
 
 use \Common\ResponseHeaderException; 
-use \Routex\Response\HTTPResponseCode;
+use \Routex\Response\HttpResponseCode;
 
 /**
  * The Response class is used to return your result back to the user. It applies the 
@@ -17,7 +17,7 @@ use \Routex\Response\HTTPResponseCode;
  * discretion of the user. If an endpoint is hit but does not exist it will 
  * automatically return a 404.
  */
-class HTTPResponse {
+class HttpResponse {
 
 	/**
 	 * An array of all custom headers that is being sent to the client.
@@ -46,7 +46,7 @@ class HTTPResponse {
 		);
 
 	public function __construct() {
-		$this->statusCodes = new HTTPResponseCode;
+		$this->statusCodes = new HttpResponseCode;
 	}
 
 	/**

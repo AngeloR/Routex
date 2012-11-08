@@ -3,7 +3,7 @@
 namespace Routex;
 
 use \Common\RouteException; 
-use \Routex\Request\HTTPRequest;
+use \Routex\Request\HttpRequest;
 use \Routex\Route\Path;
 /**
  * The Route class provides some static methods to allow us to map endpoints to callbacks. 

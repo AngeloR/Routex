@@ -6,7 +6,7 @@ namespace Routex\Response;
  * A listing of common response codes that most ReST interfaces will be utilizing. You are 
  * not limited to these, of course, and are welcome to utilize/extend this as you require.
  */
-class HTTPResponseCode {
+class HttpResponseCode {
 	
 	public $OK = 200;
 	public $CREATED = 201;

@@ -3,7 +3,7 @@
 namespace Routex;
 
 use \Routex\Route;
-use \Routex\Request\HTTPRequest;
+use \Routex\Request\HttpRequest;
 
 
 /**
@@ -87,12 +87,12 @@ class Routex {
 	 * parameters are matched.
 	 */
 	public function Exec($httpVerb, $uri) {
-		$req = new HTTPRequest();
+		$req = new HttpRequest();
 		// set headers!
 
 		$callback = Route::find($httpVerb, $uri, $req);
 
-		$res = new HTTPResponse();
+		$res = new HttpResponse();
 
 		if(is_callable($callback)) {
 			$res->statusCode = $res->STATUS['OK'];
