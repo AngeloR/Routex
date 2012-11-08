@@ -1,70 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
     <title>Routex by AngeloR</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/AngeloR/Routex">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/AngeloR/Routex/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/AngeloR/Routex/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-        <header>
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
           <h1>Routex</h1>
-          <h2>Slim PHP framework </h2>
-        </header>
+          <p>Helping you build ReSTful API's</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/AngeloR">AngeloR</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/AngeloR/Routex/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/AngeloR/Routex/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/AngeloR/Routex" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+        <h1>Routex</h1>
 
-        <hr>
+<p>Routex is a very simple ReSTful library that was created to solve a simple problem: The complexity barrier for creating truly ReSTful interfaces is too high. </p>
 
-        <section id="main_content">
-          <h3>Welcome to GitHub Pages.</h3>
+<h2>Installation</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>There are two ways to install: You can entire utilize Composer or download the GitHub repo. </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h4>GitHub</h4>
+
+<ul>
+<li><a href="https://github.com/AngeloR/Routex/downloads">Download the repo</a></li>
+<li>Unzip it wherever you require</li>
+<li>Set up your psr-0 standard autoloader OR Include the following files: 
+<pre><code>include('vendor/angelor/Routex/common/Exceptions.php');
+include('vendor/angelor/Routex/src/Response/HTTPResponseCode.php');
+include('vendor/angelor/Routex/src/Response/HTTPResponse.php');
+include('vendor/angelor/Routex/src/Request/HTTPRequest.php');
+include('vendor/angelor/Routex/src/Route/Path.php');
+include('vendor/angelor/Routex/src/Routex.php');
+include('vendor/angelor/Routex/src/Route.php');</code></pre>
+</li>
+</ul><h4>Composer</h4>
+
+<ul>
+<li><code>require: "angelor/routex": "dev-master"</code></li>
+</ul><h2>Getting Started</h2>
+
+<pre><code>use \Routex\Route;
+
+$app = \Routex\Routex::getInstance();
+
+Route::get('/', function($request, $response){
+    $response-&gt;text('Hello, World.');
+});
+
+$app-&gt;Run();
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>The line <code>use \Routex\Route;</code> is purely for convenience to ensure that we don't always need to write <code>\Routex\Route::get</code> for our method definition. </p>
 
-<h3>Designer Templates</h3>
+<p>The next line simply gets an instance of our application. The core application simply handles the configuration options and executing the router. </p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>The next section defines a route that will respond to a <code>GET</code> request on the root of the document. If that occurs, it will call the callback (the anonymous function passed as the second argument). The callback is always passed <code>\Routex\Response\HTTPResponse</code> and <code>\Routex\Request\HTTPRequest</code> objects. </p>
 
-<h3>Rather Drive Stick?</h3>
+<p>Within the callback we set the response type to text and set the body content of the response to "Hello, World." </p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Finally we call <code>$app-&gt;Run()</code> which handles the route matching.</p>
 
-<h3>Authors and Contributors</h3>
+<h2>Routing</h2>
+
+<p>Routing is essentially defining an HTTPVerb (GET, POST, PUT, DELETE etc.), a URI endpoint (/, /users, /users/23) and a callback that will be executed when a URI is matched. </p>
+
+<h4>Direct Match</h4>
+
+<p>Direct matches look for an exact match of the URI to a route. In this case, the callback will only be executed when the URI is /users </p>
+
+<pre><code>Route::get('/users', function($req, $res){
+    
+});
+</code></pre>
+
+<h4>Variable Match</h4>
+
+<p>Variable matches allow us to set named parameters in our URI. In this case, the callback will only be executed when the URI is /users/anything. In the <code>HTTPRequest</code> object that is passed to the callback, you can access the value of the variable <code>$req-&gt;param('id')</code>. </p>
+
+<pre><code>Route::get('/users/:id', function($req, $res){
+    
+});
+</code></pre>
+
+<h4>Wildcard Match</h4>
+
+<p>Wildcard paramters are the same as variable matches, except that the values provided MAY contain a <code>/</code>. In this case, the callback will only be excuted wehn the URI is <code>/users/what/are/you/doing</code>. <code>$req-&gt;param(0)</code> will contain the value <code>what/are/you/doing</code>. </p>
+
+<pre><code>Route::get('/users/*', function($req, $res){
+
+});
+</code></pre>
+
+<p>What is important to note is that routes are NOT matched in the order they are declarted. Instead they are matched in order of increasing complexity. </p>
+
+<h4>Regex Match</h4>
+
+<p>Regex matches allow us to fine tune our URI matches. In this case, the calback will only be excuted when the URI is /users/12 (where 12 is any number). However, it will not match /users/angelor.</p>
+
+<pre><code>Route::get('/users/(\d+)', function($req, $res){
+
+});
+</code></pre>
+
+<h2>Callbacks</h2>
+
+<p>Callbacks can be anything that is of the <a href="http://ca3.php.net/manual/en/language.types.callable.php">callable type</a>. </p>
+
+<h2>Where's the views and models?!</h2>
+
+<p>Routex doesn't ship with those. Calm down though, I have a really good reason. See this is a ReSTful framework and 9/10 times you're using a ReSTful interface because you are trying to build some kind of API and in general you don't need "views". Models are also not included because Routex is meant to be a framework which handles routing and requests. Chances are you already know how you want to build your application and Routex is meant to work WITH your application rather than telling you how it needs to be built. Project organization is entirely up to you. </p>
+
+<p>What Routex DOES come with, however, is easy repsonse headers. What's that? Simple. Through the <code>HTTPResponse</code> object in Routex you can easily return html, css, text, js, json or just about anything else you can think of. While the first 5 are provided as part of Routex, if oyu know the mime type for anything you can easily set it through the <code>HTTPResponse-&gt;writeHeader</code> method. </p>
+
+<p>This means that you can utilize smarty or twig or whatever else you want, and just push the output through <code>HTTPResponse-&gt;html()</code> which will ensure that your HTML is delivered back to the browser with all the appropriate headers in place.</p>
+
+<h2>Features</h2>
+
+<ul>
+<li>Complex routing (with variables and regex) - Define /api/:version/action/:format as a valid URL</li>
+<li>Route injection - The ability to load MORE routes and have them parsed against the request on the fly. </li>
+</ul><h2>Todo</h2>
+
+<ul>
+<li>Hooks - Yay. Hooks will allow anyone to expand Routex with code as they need.</li>
+</ul><h3>Authors and Contributors</h3>
 
 <p><a href="https://github.com/angelor" class="user-mention">@angelor</a></p>
 
 <h3>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+      </section>
 
-        <footer>
-          Routex is maintained by <a href="https://github.com/AngeloR">AngeloR</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-                  <script type="text/javascript">
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -75,7 +172,5 @@ $ git checkout gh-pages
             } catch(err) {}
           </script>
 
-      </div>
-    </div>
   </body>
 </html>
