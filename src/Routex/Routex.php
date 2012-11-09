@@ -7,38 +7,20 @@ use \Routex\Request\HttpRequest;
 use \Routex\Response\HttpResponse;
 
 
-/**
- * Our main class. I've tried my best to ensure that this doesn't end up a god class and god 
- * dammit I'll make whatever changes I need to so that that is ensured. While I enjoy how 
- * CI handles everything, I dislike that everything is accessible from everything else so easily. 
- * That means something is tying everything together, which isn't reusable. That's coupling. 
- * But this document isn't the place to discuss my feelings on the matter.
- */
 class Routex {
-	public $version = '0.1.0';
+
+	public $version = '0.2.0';
 	private $config;
 
-	// instance
-	private static $instance; 
-
-	/**
-	 * Instances? But they're ugly yes? yes. But it's the best way to ensure that we are only 
-	 * leaving a single access point for what essentially is the registry (config.php);
-	 */
-	private function __construct() {
-		require_once('config.php');
-		$this->config = $config;
+	function __construct() {
+		$this->loadConfig('config.php');
 	}
 
-	/**
-	 * Returns the instance of Routex
-	 */
-	public static function getInstance() {
-		if(!isset(self::$instance)) {
-			self::$instance = new Routex(); 
+	public function loadConfig($file) {
+		if(empty($this->config)) {
+			include($file);
+			$this->config = $config;
 		}
-
-		return self::$instance;
 	}
 
 	/**
@@ -89,15 +71,13 @@ class Routex {
 	 */
 	public function Exec($httpVerb, $uri) {
 		$req = new HttpRequest();
-		// set headers!
-
-		$callback = Route::find($httpVerb, $uri, $req);
-
 		$res = new HttpResponse();
+		
+		$callback = Route::find($httpVerb, $uri, $req);
 
 		if(is_callable($callback)) {
 			$res->statusCode = $res->statusCodes->OK;
-			call_user_func($callback, $req, $res);
+			call_user_func($callback, $req, $res, $this);
 		}
 		else {
 			$res->statusCode = $res->statusCodes->NOT_FOUND;
