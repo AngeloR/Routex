@@ -5,7 +5,7 @@ namespace Routex;
 use \Routex\Route;
 use \Routex\Request\HttpRequest;
 use \Routex\Response\HttpResponse;
-
+use \Routex\Response\HttpResponseCode;
 
 class Routex {
 
@@ -71,7 +71,7 @@ class Routex {
 	 */
 	public function Exec($httpVerb, $uri) {
 		$req = new HttpRequest($httpVerb, $uri);
-		$res = new HttpResponse();
+		$res = new HttpResponse(new HttpResponseCode);
 		
 		$callback = Route::find($httpVerb, $uri, $req);
 

@@ -35,8 +35,8 @@ class HttpResponse {
 	 */
 	public $statusCodes;
 
-	public function __construct() {
-		$this->statusCodes = new HttpResponseCode;
+	public function __construct(HttpResponsecode $httpResponseCode) {
+		$this->statusCodes = $httpResponseCode;
 	}
 
 	/**
