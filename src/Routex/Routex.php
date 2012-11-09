@@ -4,6 +4,7 @@ namespace Routex;
 
 use \Routex\Route;
 use \Routex\Request\HttpRequest;
+use \Routex\Response\HttpResponse;
 
 
 /**

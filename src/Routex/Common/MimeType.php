@@ -1,6 +1,6 @@
 <?php 
 
-namespace Routex;
+namespace Routex\Common;
 
 /**
  * This class defines some basic mime-types that you can utilize in your applications. 
