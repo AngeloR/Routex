@@ -1,6 +1,6 @@
 <?php 
 
-namespace Routex;
+namespace Routex\Response;
 
 use \Routex\Common\ResponseHeaderException; 
 use \Routex\Response\HttpResponseCode;
