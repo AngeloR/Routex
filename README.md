@@ -38,7 +38,7 @@ $route->get('/', function($request, $response){
 $app->run($route);
 </code></pre>
 
-The line `use \Routex\Route;` is purely for convenience to ensure that we don't always need to write `\Routex\Route::get` for our method definition. 
+The line `use \Routex\Route;` is purely for convenience.
 
 The next line simply gets an instance of our application. The core application simply handles the configuration options and executing the router. 
 
@@ -46,7 +46,7 @@ The next section defines a route that will respond to a `GET` request on the roo
 
 Within the callback we set the response type to text and set the body content of the response to "Hello, World." 
 
-Finally we call `$app->Run()` which handles the route matching.
+Finally we call `$app->run($route)` which handles the route matching.
 
 
 ## Routing
