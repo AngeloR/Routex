@@ -53,13 +53,13 @@
 <li>Unzip it wherever you require</li>
 <li>Set up your psr-0 standard autoloader OR Include the following files: 
 <pre><code>include('vendor/angelor/Routex/src/Common/MimeType.php');
-include('vendor/angelor/Routex/src/Common/Exceptions.php');
-include('vendor/angelor/Routex/src/Response/HttpResponseCode.php');
-include('vendor/angelor/Routex/src/Response/HttpResponse.php');
-include('vendor/angelor/Routex/src/Request/HttpRequest.php');
-include('vendor/angelor/Routex/src/Route/Path.php');
-include('vendor/angelor/Routex/src/Routex.php');
-include('vendor/angelor/Routex/src/Route.php');</code></pre>
+include('vendor/angelor/Routex/src/Routex/Common/Exceptions.php');
+include('vendor/angelor/Routex/src/Routex/Response/HttpResponseCode.php');
+include('vendor/angelor/Routex/src/Routex/Response/HttpResponse.php');
+include('vendor/angelor/Routex/src/Routex/Request/HttpRequest.php');
+include('vendor/angelor/Routex/src/Routex/Route/Path.php');
+include('vendor/angelor/Routex/src/Routex/Routex.php');
+include('vendor/angelor/Routex/src/Routex/Route.php');</code></pre>
 </li>
 </ul><h4>Composer</h4>
 
@@ -71,16 +71,17 @@ include('vendor/angelor/Routex/src/Route.php');</code></pre>
 
 <pre><code>use \Routex\Route;
 
-$app = \Routex\Routex::getInstance();
+$app = new \Routex\Routex();
+$route = new Route($app);
 
-Route::get('/', function($request, $response){
+$route-&gt;get('/', function($request, $response){
     $response-&gt;text('Hello, World.');
 });
 
-$app-&gt;Run();
+$app-&gt;run($route);
 </code></pre>
 
-<p>The line <code>use \Routex\Route;</code> is purely for convenience to ensure that we don't always need to write <code>\Routex\Route::get</code> for our method definition. </p>
+<p>The line <code>use \Routex\Route;</code> is purely for convenience.</p>
 
 <p>The next line simply gets an instance of our application. The core application simply handles the configuration options and executing the router. </p>
 
@@ -88,7 +89,7 @@ $app-&gt;Run();
 
 <p>Within the callback we set the response type to text and set the body content of the response to "Hello, World." </p>
 
-<p>Finally we call <code>$app-&gt;Run()</code> which handles the route matching.</p>
+<p>Finally we call <code>$app-&gt;run($route)</code> which handles the route matching.</p>
 
 <h2>Routing</h2>
 
@@ -98,7 +99,7 @@ $app-&gt;Run();
 
 <p>Direct matches look for an exact match of the URI to a route. In this case, the callback will only be executed when the URI is /users </p>
 
-<pre><code>Route::get('/users', function($req, $res){
+<pre><code>$route-&gt;get('/users', function($req, $res){
     
 });
 </code></pre>
@@ -107,7 +108,7 @@ $app-&gt;Run();
 
 <p>Variable matches allow us to set named parameters in our URI. In this case, the callback will only be executed when the URI is /users/anything. In the <code>HttpRequest</code> object that is passed to the callback, you can access the value of the variable <code>$req-&gt;param('id')</code>. </p>
 
-<pre><code>Route::get('/users/:id', function($req, $res){
+<pre><code>$route-&gt;get('/users/:id', function($req, $res){
     
 });
 </code></pre>
@@ -116,25 +117,37 @@ $app-&gt;Run();
 
 <p>Wildcard paramters are the same as variable matches, except that the values provided MAY contain a <code>/</code>. In this case, the callback will only be excuted wehn the URI is <code>/users/what/are/you/doing</code>. <code>$req-&gt;param(0)</code> will contain the value <code>what/are/you/doing</code>. </p>
 
-<pre><code>Route::get('/users/*', function($req, $res){
+<pre><code>$route-&gt;get('/users/*', function($req, $res){
 
 });
 </code></pre>
 
-<p>What is important to note is that routes are NOT matched in the order they are declarted. Instead they are matched in order of increasing complexity. </p>
+<p>What is important to note is that routes are NOT matched in the order they are declarted. Instead they are matched in order of decreasing complexity. This means, that if you have a route that defines <code>/path/to/my/route</code>, <code>/path/:to/my</code> and <code>/path/*</code> the system will first try and match <code>/path/to/my/route</code> before trying to match <code>/path/:to/my</code> and finally <code>/path/*</code>.</p>
 
 <h4>Regex Match</h4>
 
 <p>Regex matches allow us to fine tune our URI matches. In this case, the calback will only be excuted when the URI is /users/12 (where 12 is any number). However, it will not match /users/angelor.</p>
 
-<pre><code>Route::get('/users/(\d+)', function($req, $res){
+<pre><code>$route-&gt;get('/users/(\d+)', function($req, $res){
 
 });
 </code></pre>
 
 <h2>Callbacks</h2>
 
-<p>Callbacks can be anything that is of the <a href="http://ca3.php.net/manual/en/language.types.callable.php">callable type</a>. </p>
+<p>Callbacks can be anything that is of the <a href="http://ca3.php.net/manual/en/language.types.callable.php">callable type</a>. A callback will always receive <strong>THREE</strong> parameters, but most times only the first two will be required. In order passed, they are: </p>
+
+<h4>HttpRequest</h4>
+
+<p>This holds information about the actual request. Headers, URI and Verb (GET/POST/PUT etc) are all part of this object. Depending on needs, additional information might be available to users about the request.</p>
+
+<h4>HttpResponse</h4>
+
+<p>This holds information about YOUR response back to the request. It sets up some defaults (status code and headers) but is completely customizable and allows you to add/modify headers as well as configure the response type through some pre-created methods.</p>
+
+<h4>Routex</h4>
+
+<p>As well as the Request/Response you also receive a copy of the application. This is mainly used for adding new routes on the fly or access configuration vars from within your callback.</p>
 
 <h2>Where's the views and models?!</h2>
 
