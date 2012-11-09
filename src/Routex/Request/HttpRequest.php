@@ -12,16 +12,18 @@ namespace Routex\Request;
  */
 class HttpRequest {
 
+	public $httpVerb; 
+	public $uri;
+
 	private $params;
 	private $headers;
 
-	public function __construct($args = array()) {
+	public function __construct($verb, $uri) {
+		$this->httpVerb = $verb;
+		$this->uri = $uri;
+
 		$this->params = array();
 		$this->setHeaders();
-
-		if(is_array($args)) {
-			$this->setParams($args);
-		}
 	}
 
 	public function setParams($args) {

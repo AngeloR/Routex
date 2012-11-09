@@ -70,7 +70,7 @@ class Routex {
 	 * parameters are matched.
 	 */
 	public function Exec($httpVerb, $uri) {
-		$req = new HttpRequest();
+		$req = new HttpRequest($httpVerb, $uri);
 		$res = new HttpResponse();
 		
 		$callback = Route::find($httpVerb, $uri, $req);
