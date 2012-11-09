@@ -52,10 +52,11 @@
 <li><a href="https://github.com/AngeloR/Routex/downloads">Download the repo</a></li>
 <li>Unzip it wherever you require</li>
 <li>Set up your psr-0 standard autoloader OR Include the following files: 
-<pre><code>include('vendor/angelor/Routex/common/Exceptions.php');
-include('vendor/angelor/Routex/src/Response/HTTPResponseCode.php');
-include('vendor/angelor/Routex/src/Response/HTTPResponse.php');
-include('vendor/angelor/Routex/src/Request/HTTPRequest.php');
+<pre><code>include('vendor/angelor/Routex/src/Common/MimeType.php');
+include('vendor/angelor/Routex/src/Common/Exceptions.php');
+include('vendor/angelor/Routex/src/Response/HttpResponseCode.php');
+include('vendor/angelor/Routex/src/Response/HttpResponse.php');
+include('vendor/angelor/Routex/src/Request/HttpRequest.php');
 include('vendor/angelor/Routex/src/Route/Path.php');
 include('vendor/angelor/Routex/src/Routex.php');
 include('vendor/angelor/Routex/src/Route.php');</code></pre>
@@ -65,6 +66,8 @@ include('vendor/angelor/Routex/src/Route.php');</code></pre>
 <ul>
 <li><code>require: "angelor/routex": "dev-master"</code></li>
 </ul><h2>Getting Started</h2>
+
+<p>The first thing to do is <code>cp config.sample.php</code> from <code>/vendor/angelor/routex/</code> to the root of your application. </p>
 
 <pre><code>use \Routex\Route;
 
@@ -81,7 +84,7 @@ $app-&gt;Run();
 
 <p>The next line simply gets an instance of our application. The core application simply handles the configuration options and executing the router. </p>
 
-<p>The next section defines a route that will respond to a <code>GET</code> request on the root of the document. If that occurs, it will call the callback (the anonymous function passed as the second argument). The callback is always passed <code>\Routex\Response\HTTPResponse</code> and <code>\Routex\Request\HTTPRequest</code> objects. </p>
+<p>The next section defines a route that will respond to a <code>GET</code> request on the root of the document. If that occurs, it will call the callback (the anonymous function passed as the second argument). The callback is always passed <code>\Routex\Response\HttpResponse</code> and <code>\Routex\Request\HttpRequest</code> objects. </p>
 
 <p>Within the callback we set the response type to text and set the body content of the response to "Hello, World." </p>
 
@@ -102,7 +105,7 @@ $app-&gt;Run();
 
 <h4>Variable Match</h4>
 
-<p>Variable matches allow us to set named parameters in our URI. In this case, the callback will only be executed when the URI is /users/anything. In the <code>HTTPRequest</code> object that is passed to the callback, you can access the value of the variable <code>$req-&gt;param('id')</code>. </p>
+<p>Variable matches allow us to set named parameters in our URI. In this case, the callback will only be executed when the URI is /users/anything. In the <code>HttpRequest</code> object that is passed to the callback, you can access the value of the variable <code>$req-&gt;param('id')</code>. </p>
 
 <pre><code>Route::get('/users/:id', function($req, $res){
     
@@ -137,26 +140,30 @@ $app-&gt;Run();
 
 <p>Routex doesn't ship with those. Calm down though, I have a really good reason. See this is a ReSTful framework and 9/10 times you're using a ReSTful interface because you are trying to build some kind of API and in general you don't need "views". Models are also not included because Routex is meant to be a framework which handles routing and requests. Chances are you already know how you want to build your application and Routex is meant to work WITH your application rather than telling you how it needs to be built. Project organization is entirely up to you. </p>
 
-<p>What Routex DOES come with, however, is easy repsonse headers. What's that? Simple. Through the <code>HTTPResponse</code> object in Routex you can easily return html, css, text, js, json or just about anything else you can think of. While the first 5 are provided as part of Routex, if oyu know the mime type for anything you can easily set it through the <code>HTTPResponse-&gt;writeHeader</code> method. </p>
+<p>What Routex DOES come with, however, is easy repsonse headers. What's that? Simple. Through the <code>HttpResponse</code> object in Routex you can easily return html, css, text, js, json or just about anything else you can think of. While the first 5 are provided as part of Routex, if oyu know the mime type for anything you can easily set it through the <code>HttpResponse-&gt;writeHeader</code> method. </p>
 
-<p>This means that you can utilize smarty or twig or whatever else you want, and just push the output through <code>HTTPResponse-&gt;html()</code> which will ensure that your HTML is delivered back to the browser with all the appropriate headers in place.</p>
+<p>This means that you can utilize smarty or twig or whatever else you want, and just push the output through <code>HttpResponse-&gt;html()</code> which will ensure that your HTML is delivered back to the browser with all the appropriate headers in place.</p>
 
 <h2>Features</h2>
 
 <ul>
 <li>Complex routing (with variables and regex) - Define /api/:version/action/:format as a valid URL</li>
 <li>Route injection - The ability to load MORE routes and have them parsed against the request on the fly. </li>
+<li>Compliance with <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a> and <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md">PSR-1</a>
+</li>
 </ul><h2>Todo</h2>
 
 <ul>
-<li>Hooks - Yay. Hooks will allow anyone to expand Routex with code as they need.</li>
-</ul><h3>Authors and Contributors</h3>
+<li>Unit Tests</li>
+<li>Proper getting-started articles</li>
+</ul><h2>Special Thanks</h2>
 
-<p><a href="https://github.com/angelor" class="user-mention">@angelor</a></p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ul>
+<li><a href="https://github.com/sofadesign/limonade">Limonade-php</a></li>
+<li><a href="http://getcomposer.org/">Composer</a></li>
+<li><a href="https://packagist.org">Packagist</a></li>
+<li>GitHub</li>
+</ul>
       </section>
 
     </div>
