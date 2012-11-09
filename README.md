@@ -29,12 +29,13 @@ The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/src
 <pre><code>use \Routex\Route;
 
 $app = new \Routex\Routex();
+$route = new Route($app);
 
-Route::get('/', function($request, $response){
+$route->get('/', function($request, $response){
 	$response->text('Hello, World.');
 });
 
-$app->Run();
+$app->run($route);
 </code></pre>
 
 The line `use \Routex\Route;` is purely for convenience to ensure that we don't always need to write `\Routex\Route::get` for our method definition. 
@@ -53,14 +54,14 @@ Routing is essentially defining an HTTPVerb (GET, POST, PUT, DELETE etc.), a URI
 
 #### Direct Match
 Direct matches look for an exact match of the URI to a route. In this case, the callback will only be executed when the URI is /users 
-<pre><code>Route::get('/users', function($req, $res){
+<pre><code>$route->get('/users', function($req, $res){
 	
 });
 </code></pre>
 
 #### Variable Match
 Variable matches allow us to set named parameters in our URI. In this case, the callback will only be executed when the URI is /users/anything. In the `HttpRequest` object that is passed to the callback, you can access the value of the variable `$req->param('id')`. 
-<pre><code>Route::get('/users/:id', function($req, $res){
+<pre><code>$route->get('/users/:id', function($req, $res){
 	
 });
 </code></pre>
@@ -68,7 +69,7 @@ Variable matches allow us to set named parameters in our URI. In this case, the 
 #### Wildcard Match 
 Wildcard paramters are the same as variable matches, except that the values provided MAY contain a `/`. In this case, the callback will only be excuted wehn the URI is `/users/what/are/you/doing`. `$req->param(0)` will contain the value `what/are/you/doing`. 
 
-<pre><code>Route::get('/users/*', function($req, $res){
+<pre><code>$route->get('/users/*', function($req, $res){
 
 });
 </code></pre>
@@ -78,7 +79,7 @@ What is important to note is that routes are NOT matched in the order they are d
 #### Regex Match
 Regex matches allow us to fine tune our URI matches. In this case, the calback will only be excuted when the URI is /users/12 (where 12 is any number). However, it will not match /users/angelor.
 
-<pre><code>Route::get('/users/(\d+)', function($req, $res){
+<pre><code>$route->get('/users/(\d+)', function($req, $res){
 
 });
 </code></pre>
