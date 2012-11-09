@@ -24,7 +24,7 @@ There are two ways to install: You can entire utilize Composer or download the G
 - `require: "angelor/routex": "dev-master"`
 
 ## Getting Started
-The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/src/Routex/` to the root of your application. 
+The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/` to the root of your application. 
 
 <pre><code>use \Routex\Route;
 
