@@ -28,7 +28,7 @@ The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/src
 
 <pre><code>use \Routex\Route;
 
-$app = \Routex\Routex::getInstance();
+$app = new \Routex\Routex();
 
 Route::get('/', function($request, $response){
 	$response->text('Hello, World.');
@@ -73,7 +73,7 @@ Wildcard paramters are the same as variable matches, except that the values prov
 });
 </code></pre>
 
-What is important to note is that routes are NOT matched in the order they are declarted. Instead they are matched in order of increasing complexity. 
+What is important to note is that routes are NOT matched in the order they are declarted. Instead they are matched in order of decreasing complexity. This means, that if you have a route that defines `/path/to/my/route`, `/path/:to/my` and `/path/*` the system will first try and match `/path/to/my/route` before trying to match `/path/:to/my` and finally `/path/*`.
 
 #### Regex Match
 Regex matches allow us to fine tune our URI matches. In this case, the calback will only be excuted when the URI is /users/12 (where 12 is any number). However, it will not match /users/angelor.
@@ -85,7 +85,16 @@ Regex matches allow us to fine tune our URI matches. In this case, the calback w
 
 
 ## Callbacks
-Callbacks can be anything that is of the [callable type](http://ca3.php.net/manual/en/language.types.callable.php). 
+Callbacks can be anything that is of the [callable type](http://ca3.php.net/manual/en/language.types.callable.php). A callback will always receive **THREE** parameters, but most times only the first two will be required. In order passed, they are: 
+
+#### HttpRequest
+This holds information about the actual request. Headers, URI and Verb (GET/POST/PUT etc) are all part of this object. Depending on needs, additional information might be available to users about the request.
+
+#### HttpResponse
+This holds information about YOUR response back to the request. It sets up some defaults (status code and headers) but is completely customizable and allows you to add/modify headers as well as configure the response type through some pre-created methods.
+
+#### Routex
+As well as the Request/Response you also receive a copy of the application. This is mainly used for adding new routes on the fly or access configuration vars from within your callback.
 
 
 ## Where's the views and models?! 
