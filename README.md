@@ -12,19 +12,19 @@ There are two ways to install: You can entire utilize Composer or download the G
 - Unzip it wherever you require
 - Set up your psr-0 standard autoloader OR Include the following files: 
 	<pre><code>include('vendor/angelor/Routex/src/Common/MimeType.php');
-	include('vendor/angelor/Routex/src/Common/Exceptions.php');
-	include('vendor/angelor/Routex/src/Response/HttpResponseCode.php');
-	include('vendor/angelor/Routex/src/Response/HttpResponse.php');
-	include('vendor/angelor/Routex/src/Request/HttpRequest.php');
-	include('vendor/angelor/Routex/src/Route/Path.php');
-	include('vendor/angelor/Routex/src/Routex.php');
-	include('vendor/angelor/Routex/src/Route.php');</code></pre>
+	include('vendor/angelor/Routex/src/Routex/Common/Exceptions.php');
+	include('vendor/angelor/Routex/src/Routex/Response/HttpResponseCode.php');
+	include('vendor/angelor/Routex/src/Routex/Response/HttpResponse.php');
+	include('vendor/angelor/Routex/src/Routex/Request/HttpRequest.php');
+	include('vendor/angelor/Routex/src/Routex/Route/Path.php');
+	include('vendor/angelor/Routex/src/Routex/Routex.php');
+	include('vendor/angelor/Routex/src/Routex/Route.php');</code></pre>
 
 #### Composer
 - `require: "angelor/routex": "dev-master"`
 
 ## Getting Started
-The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/` to the root of your application. 
+The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/src/Routex/` to the root of your application. 
 
 <pre><code>use \Routex\Route;
 
