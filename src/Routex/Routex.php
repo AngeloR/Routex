@@ -43,13 +43,11 @@ class Routex {
 		return $root;
 	}
 
-
 	/**
 	 * A nessessary end-point. Although it shows up at the end of index.php really what it does 
-	 * is parse the current route and hand it off the "exec" which deals with getting the 
-	 * callback and actually calling it. 
+	 * is parse the current route and call the appropriate callback
 	 */
-	public function Run(\Routex\Route $route) {
+	public function run(\Routex\Route $route) {
 		$httpVerb = $_SERVER['REQUEST_METHOD'];
 		$route_path = $this->config('route.path');
 		
@@ -59,21 +57,11 @@ class Routex {
 		else {
 			$path = $_GET[$this->config('route.path')];
 		}
-		
-		$this->exec($httpVerb, $path, $route);
-	}
 
-	/**
-	 * This takes our verb and final path and figures out the callback. Note that even though it 
-	 * is an integral part of Run it is separate. This means that you can perform "lazyLoading" 
-	 * to add new routes. Instead of adding 1000+ routes all at once you can add them as certain 
-	 * parameters are matched.
-	 */
-	public function exec($httpVerb, $uri, \Routex\Route $route) {
-		$req = new HttpRequest($httpVerb, $uri);
+		$req = new HttpRequest($httpVerb, $path);
 		$res = new HttpResponse(new HttpResponseCode);
 		
-		$callback = $route->find($httpVerb, $uri, $req);
+		$callback = $route->find($httpVerb, $path, $req);
 
 		if(is_callable($callback)) {
 			$res->statusCode = $res->statusCodes->OK;
