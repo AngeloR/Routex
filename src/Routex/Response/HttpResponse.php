@@ -4,7 +4,7 @@ namespace Routex\Response;
 
 use \Routex\Common\ResponseHeaderException; 
 use \Routex\Response\HttpResponseCode;
-use \Routex\MimeType;
+use \Routex\Common\MimeType;
 
 /**
  * The Response class is used to return your result back to the user. It applies the 
