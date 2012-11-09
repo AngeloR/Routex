@@ -105,3 +105,9 @@ This means that you can utilize smarty or twig or whatever else you want, and ju
 ## Todo
 - Unit Tests
 - Proper getting-started articles
+
+## Special Thanks
+- [Limonade-php](https://github.com/sofadesign/limonade)
+- [Composer](http://getcomposer.org/)
+- [Packagist](https://packagist.org)
+- GitHub
