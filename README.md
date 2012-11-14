@@ -12,10 +12,11 @@ There are two ways to install: You can entire utilize Composer or download the G
 - Unzip it wherever you require
 - Set up your psr-0 standard autoloader OR Include the following files: 
 	<pre><code>include('vendor/angelor/Routex/src/Common/MimeType.php');
-	include('vendor/angelor/Routex/src/Routex/Common/Exceptions.php');
+	include('vendor/angelor/Routex/src/Routex/Response/ResponseHeaderException.php');
 	include('vendor/angelor/Routex/src/Routex/Response/HttpResponseCode.php');
 	include('vendor/angelor/Routex/src/Routex/Response/HttpResponse.php');
 	include('vendor/angelor/Routex/src/Routex/Request/HttpRequest.php');
+	include('vendor/angelor/Routex/src/Routex/Route/RouteException.php');
 	include('vendor/angelor/Routex/src/Routex/Route/Path.php');
 	include('vendor/angelor/Routex/src/Routex/Routex.php');
 	include('vendor/angelor/Routex/src/Routex/Route.php');</code></pre>
