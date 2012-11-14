@@ -19,8 +19,8 @@ class HttpRequest {
 	private $headers;
 
 	/**
-	 * @var string $verb the http verb that the request is generated with
-	 * @var string $uri the endpoint that is being accessed
+	 * @param string $verb the http verb that the request is generated with
+	 * @param string $uri the endpoint that is being accessed
 	 */
 	public function __construct($verb, $uri) {
 		$this->httpVerb = $verb;
@@ -33,7 +33,7 @@ class HttpRequest {
 	/**
 	 * Set all the arguments pertaining to this request
 	 * 
-	 * @var array $args a list of the arguments in this endpoint
+	 * @param array $args a list of the arguments in this endpoint
 	 */
 	public function setParams(array $args) {
 		$this->params = array_merge($this->params, $args);
@@ -42,7 +42,7 @@ class HttpRequest {
 	/**
 	 * Return the value of a particular argument
 	 * 
-	 * @var string $name the key of the argument that you are trying to access
+	 * @param string $name the key of the argument that you are trying to access
 	 * 
 	 * @return mixed the value of the argument being accessed
 	 */
@@ -71,7 +71,7 @@ class HttpRequest {
 	/**
 	 * Get the value of a particular header
 	 * 
-	 * @var string $name the header you are trying to retrieve the value for
+	 * @param string $name the header you are trying to retrieve the value for
 	 * 
 	 * @return string the value of the header
 	 */
