@@ -16,6 +16,11 @@ class Routex {
 		$this->loadConfig('config.php');
 	}
 
+	/**
+	 * Load the configuration file defined
+	 * 
+	 * @var string $file the path and filename of the config file to load
+	 */
 	public function loadConfig($file) {
 		if(empty($this->config)) {
 			include($file);
@@ -27,6 +32,11 @@ class Routex {
 	 * Pass in a .delimitered path and it returns the result. Want to know the active db? 
 	 * Config('db.active'). Pretty nifty right? It tries to go as far through your path 
 	 * as it can before it fails and returns whatever it can find. 
+	 * 
+	 * @var string $key_path (optional) the . delimitered path to a config var
+	 * @var string $root (optional) used internally for recursion
+	 * 
+	 * @return mixed the value from the path to the config var
 	 */
 	public function config($key_path = '', $root = null) {
 		if(empty($root)) {
@@ -46,6 +56,8 @@ class Routex {
 	/**
 	 * A nessessary end-point. Although it shows up at the end of index.php really what it does 
 	 * is parse the current route and call the appropriate callback
+	 * 
+	 * @var \Routex\Route $route the \Routex\Route object containing all the endpoints defined
 	 */
 	public function run(\Routex\Route $route) {
 		$httpVerb = $_SERVER['REQUEST_METHOD'];

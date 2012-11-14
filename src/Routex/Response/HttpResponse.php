@@ -35,16 +35,19 @@ class HttpResponse {
 	 */
 	public $statusCodes;
 
-	public function __construct(HttpResponsecode $httpResponseCode) {
+	/**
+	 * @var HttpResponseCode $httpResponseCode appropraite http response codes
+	 */
+	public function __construct(HttpResponseCode $httpResponseCode) {
 		$this->statusCodes = $httpResponseCode;
 	}
 
 	/**
 	 * Write a header. 
 	 * 
-	 * @var $name string The name of the header
-	 * @var $text string The content of the header
-	 * @var $overwrite bool Should Routex overwrite an existing header
+	 * @var string $name The name of the header
+	 * @var string $text The content of the header
+	 * @var bool $overwrite Should Routex overwrite an existing header
 	 */
 	public function writeHeader($name, $content, $overwrite = false) {
 		header($name . ': ' . $content, $overwrite);
@@ -52,6 +55,8 @@ class HttpResponse {
 
 	/**
 	 * This should be used when you do not want to return anything 
+	 * 
+	 * @var string $mime (optional) the mime type to return
 	 */
 	public function end($mime = null) {
 		// set the status codes for phpfpm
@@ -71,6 +76,8 @@ class HttpResponse {
 
 	/**
 	 * Return a text type doc
+	 * 
+	 * @var string $thing the document body that you are returning
 	 */
 	public function text($thing) {
 		$this->create(MimeType::$text, $thing);
@@ -78,6 +85,8 @@ class HttpResponse {
 
 	/**
 	 * Return a css type doc
+	 * 
+	 * @var string $thing the document body that you are returning
 	 */
 	public function css($thing) {
 		$this->create(MimeType::$css, $thing);
@@ -85,6 +94,8 @@ class HttpResponse {
 
 	/**
 	 * Return a js type doc
+	 * 
+	 * @var string $thing the document body that you are returning
 	 */
 	public function js($thing) {
 		$this->create(MimeType::$js, $thing);
@@ -92,6 +103,8 @@ class HttpResponse {
 
 	/**
 	 * Return an html type doc
+	 * 
+	 * @var string $thing the document body that you are returning
 	 */
 	public function html($thing) {
 		$this->create(MimeType::$html, $thing);
@@ -99,6 +112,8 @@ class HttpResponse {
 
 	/**
 	 * Return a json type doc
+	 * 
+	 * @var string $thing the document body that you are returning
 	 */
 	public function json($thing) {
 		$thing = json_encode($thing);
@@ -113,6 +128,9 @@ class HttpResponse {
 	 * I would advise against using this unless one of the other methods really don't 
 	 * meet your needs. If you are trying to add custom headers on top of the other 
 	 * methods, use writeHeader. 
+	 * 
+	 * @var string $mime the mime type that you are returning
+	 * @var string $thing the document body that you are returning
 	 */
 	public function create($mime, $thing) {
 		$this->end($mime);

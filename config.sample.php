@@ -7,6 +7,6 @@ $config['app']['env'] = 'development';
 // This is the key that appears in your url: index.php?uri= in this case
 $config['route']['path'] = 'uri';
 
-// Accepted Http Verbs. Add each one to teh array, but make sure that they are 
+// Accepted Http Verbs. Add each one to the array, but make sure that they are 
 // capitalized
 $config['http']['verbs'] = array('GET','POST','PUT','DELETE','HEAD');
