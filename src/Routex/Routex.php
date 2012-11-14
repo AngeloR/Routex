@@ -9,7 +9,7 @@ use \Routex\Response\HttpResponseCode;
 
 class Routex {
 
-	public $version = '0.2.0';
+	public $version = '0.3.0';
 	private $config;
 
 	function __construct() {
