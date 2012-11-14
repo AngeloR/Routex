@@ -29,7 +29,7 @@ The first thing to do is `cp config.sample.php` from `/vendor/angelor/routex/` t
 <pre><code>use \Routex\Route;
 
 $app = new \Routex\Routex();
-$route = new Route($app);
+$route = new Route($app->config('http.verbs'));
 
 $route->get('/', function($request, $response){
 	$response->text('Hello, World.');
@@ -41,6 +41,8 @@ $app->run($route);
 The line `use \Routex\Route;` is purely for convenience.
 
 The next line simply gets an instance of our application. The core application simply handles the configuration options and executing the router. 
+
+We then create an instance of the \Routex\Route object and pass it a list of HTTP Verbs that we support (as an array). In this case, I'm using the default http verbs as defined in our config.php file.
 
 The next section defines a route that will respond to a `GET` request on the root of the document. If that occurs, it will call the callback (the anonymous function passed as the second argument). The callback is always passed `\Routex\Response\HttpResponse` and `\Routex\Request\HttpRequest` objects. 
 
