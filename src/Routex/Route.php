@@ -13,11 +13,8 @@ class Route {
 	public $VERBS = array(); 
 	public $REQUEST_METHODS;
 
-	private $app;
-
-	function __construct(\Routex\Routex $app) {
-		$this->app = $app;
-		$this->REQUEST_METHODS = $this->app->config('http.verbs');
+	function __construct(array $supportedVerbs) {
+		$this->REQUEST_METHODS = $supportedVerbs
 
 		foreach($this->REQUEST_METHODS as $verb) {
 			$this->VERBS[$verb] = array();
