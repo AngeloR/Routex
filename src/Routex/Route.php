@@ -183,8 +183,10 @@ class Route {
 	        		$name = $paramCount;
 	        	}
 
-	        	$routePath->paramNames[] = $name;
-	        	$paramCount++;
+	        	if(!empty($name)) {
+	        		$routePath->paramNames[] = $name;
+	        		$paramCount++;
+	        	}
 	    	}
 
 	    	//$routePath->paramNames[] = $matches;
