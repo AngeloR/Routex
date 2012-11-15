@@ -180,6 +180,7 @@ class Route {
 	        	}
 	      		else {
 	        		$parsed[] = "/".preg_quote($piece, "#");
+	        		$name = $paramCount;
 	        	}
 
 	        	$routePath->paramNames[] = $name;
