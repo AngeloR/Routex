@@ -19,7 +19,7 @@ class Route {
 	 * @param array $supportedVerbs a list of HTTP Verbs that we are supporting within the application
 	 */
 	function __construct(array $supportedVerbs) {
-		$this->REQUEST_METHODS = $supportedVerbs
+		$this->REQUEST_METHODS = $supportedVerbs;
 
 		foreach($this->REQUEST_METHODS as $verb) {
 			$this->VERBS[$verb] = array();
