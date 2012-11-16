@@ -65,7 +65,29 @@ class HttpRequest {
 	 * Get all request headers and set them so that they are accessible within this object
 	 */
 	public function setHeaders() {
-		$this->headers = getallheaders();
+		$this->headers = $this->getAllHeaders();
+	}
+	
+	/**
+	 * getallheaders only exists in an apache env, 
+	 * otherwise, we simply rely on this
+	 */
+	private function getAllHeaders() {
+		if(function_eixsts('apache_request_headers')) {
+			return getallheaders();
+		}
+		else {
+			$out = array();
+			foreach($_SERVER as $k=>$v) {
+				if(substr($k, 0, 5) == 'HTTP_') {
+					$k = str_replace(' ', '-', ucwords(strtolower(str_replace('_',' ',substr($key, 5)))));
+					$out[$k] = $v;
+				}
+
+				$out[$k] = $v;
+			}
+			return $out;
+		}
 	}
 
 	/**
