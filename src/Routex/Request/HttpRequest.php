@@ -73,7 +73,7 @@ class HttpRequest {
 	 * otherwise, we simply rely on this
 	 */
 	private function getAllHeaders() {
-		if(function_eixsts('apache_request_headers')) {
+		if(function_exists('apache_request_headers')) {
 			return getallheaders();
 		}
 		else {
