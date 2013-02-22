@@ -8,14 +8,14 @@ namespace Routex\Response;
  */
 class HttpResponseCode {
 	
-	constant $OK = 200;
-	constant $CREATED = 201;
-	constant $MOVED_PERMANENTLY = 301;
-	constant $FOUND = 302;
-	constant $BAD_REQUEST = 400;
-	constant $UNAUTHORIZED = 401;
-	constant $FORBIDDEN = 403;
-	constant $NOT_FOUND = 404;
-	constant $ENTITY_TOO_LARGE = 413;
-	constant $NOT_IMPLEMENTED = 501;
+	const $OK = 200;
+	const $CREATED = 201;
+	const $MOVED_PERMANENTLY = 301;
+	const $FOUND = 302;
+	const $BAD_REQUEST = 400;
+	const $UNAUTHORIZED = 401;
+	const $FORBIDDEN = 403;
+	const $NOT_FOUND = 404;
+	const $ENTITY_TOO_LARGE = 413;
+	const $NOT_IMPLEMENTED = 501;
 }
