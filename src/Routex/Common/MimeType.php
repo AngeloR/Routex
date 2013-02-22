@@ -10,28 +10,28 @@ namespace Routex\Common;
 class MimeType {
 
 	// Plain-text formats
-	constant $CSS = 'text/css';
-	constant $HTML = 'text/html';
-	constant $TEXT = 'text/plain';
-	constant $XML = 'text/xml';
+	const CSS = 'text/css';
+	const HTML = 'text/html';
+	const TEXT = 'text/plain';
+	const XML = 'text/xml';
 
 	// Images
-	constant $GIF = 'image/gif';
-	constant $JPG = 'image/jpg';
-	constant $PNG = 'image/png';
+	const GIF = 'image/gif';
+	const JPG = 'image/jpg';
+	const PNG = 'image/png';
 
 	// Video
-	constant $FLASH = 'video/x-flv';
-	constant $OGG = 'video/ogg';
-	constant $WEBM = 'video/webm';
+	const FLASH = 'video/x-flv';
+	const OGG = 'video/ogg';
+	const WEBM = 'video/webm';
 
 	// Application
-	constant $APPLICATION = 'application/octet-stream';
-	constant $JS = 'application/javascript';
-	constant $JSON = 'application/json';
-	constant $PDF = 'application/pdf';
-	constant $RES = 'application/rss+xml';
-	constant $XHTML = 'application/xhtml+xml';
-	constant $ZIP = 'application/zip';
+	const APPLICATION = 'application/octet-stream';
+	const JS = 'application/javascript';
+	const JSON = 'application/json';
+	const PDF = 'application/pdf';
+	const RES = 'application/rss+xml';
+	const XHTML = 'application/xhtml+xml';
+	const ZIP = 'application/zip';
 	
 }

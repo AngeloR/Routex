@@ -80,7 +80,7 @@ class HttpResponse {
 	 * @param string $thing the document body that you are returning
 	 */
 	public function text($thing) {
-		$this->create(MimeType::$text, $thing);
+		$this->create(MimeType::TEXT, $thing);
 	}
 
 	/**
@@ -89,7 +89,7 @@ class HttpResponse {
 	 * @param string $thing the document body that you are returning
 	 */
 	public function css($thing) {
-		$this->create(MimeType::$css, $thing);
+		$this->create(MimeType::CSS, $thing);
 	}
 
 	/**
@@ -98,7 +98,7 @@ class HttpResponse {
 	 * @param string $thing the document body that you are returning
 	 */
 	public function js($thing) {
-		$this->create(MimeType::$js, $thing);
+		$this->create(MimeType::JS, $thing);
 	}
 
 	/**
@@ -107,7 +107,7 @@ class HttpResponse {
 	 * @param string $thing the document body that you are returning
 	 */
 	public function html($thing) {
-		$this->create(MimeType::$html, $thing);
+		$this->create(MimeType::HTML, $thing);
 	}
 
 	/**
