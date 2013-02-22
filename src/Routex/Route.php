@@ -131,7 +131,7 @@ class Route {
 	 * user-defined route and parses it based on the regex strings. It then returns the final 
 	 * regex value that will match it. This section will need to be documented further 
 	 */
-	private static function routeBuild($path) {
+	private function routeBuild($path) {
 		$routePath = new Path();
 
 	  	$single_asterisk_subpattern   = "(?:/(.*))?";
