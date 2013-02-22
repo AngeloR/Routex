@@ -23,8 +23,13 @@ class Routex {
 	 */
 	public function loadConfig($file) {
 		if(empty($this->config)) {
-			include($file);
-			$this->config = $config;
+            if(file_exists($file)) {
+                include($file);
+    		    $this->config = $config;   
+            }
+            else {
+                throw new Exception('Configuration file not set');
+            }
 		}
 	}
 
