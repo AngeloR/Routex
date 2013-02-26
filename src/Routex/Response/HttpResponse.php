@@ -31,15 +31,10 @@ class HttpResponse {
 	public $statusCode;
 
 	/**
-	 * @param \Routex\ResponseCode
+	 * 
 	 */
-	public $statusCodes;
-
-	/**
-	 * @param HttpResponseCode $httpResponseCode appropraite http response codes
-	 */
-	public function __construct(HttpResponseCode $httpResponseCode) {
-		$this->statusCodes = $httpResponseCode;
+	public function __construct() {
+		
 	}
 
 	/**
@@ -61,7 +56,7 @@ class HttpResponse {
 	public function end($mime = null) {
 		// set the status codes for phpfpm
 		if(empty($this->statusCode)) {
-			$this->statusCode = $this->statusCodes::OK;
+			$this->statusCode = HttpResponseCode::OK;
 		}
 		$this->writeHeader('Status', $this->statusCode);
 		// this header is special due to its format! 
