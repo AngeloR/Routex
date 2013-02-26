@@ -61,7 +61,7 @@ class HttpResponse {
 	public function end($mime = null) {
 		// set the status codes for phpfpm
 		if(empty($this->statusCode)) {
-			$this->statusCode = $this->statusCodes->OK;
+			$this->statusCode = $this->statusCodes::OK;
 		}
 		$this->writeHeader('Status', $this->statusCode);
 		// this header is special due to its format! 
@@ -119,7 +119,7 @@ class HttpResponse {
 		$thing = json_encode($thing);
 		// json requests will most likely change, so this is set by default
 		$this->writeHeader('Cache-Control', 'no-cache, must-revalidate');
-		$this->create(MimeType::$json, $thing);
+		$this->create(MimeType::JSON, $thing);
 	}
 
 	/**
